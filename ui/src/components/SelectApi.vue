@@ -30,15 +30,7 @@ export default {
       type: Boolean,
       default: true
     },
-    index: {
-      type: String,
-      default: ''
-    },
     optionFormater: {
-      type: Function,
-      default: null
-    },
-    noIndexFormater: {
       type: Function,
       default: null
     }
@@ -85,8 +77,8 @@ export default {
           this.$emit('fetched')
 
           if (this.optionFormater) {
-            this.clearOptions = this.optionFormater(response.data._embedded[this.index])
-            this.options = this.optionFormater(response.data._embedded[this.index])
+            this.clearOptions = this.optionFormater(response.data)
+            this.options = this.optionFormater(response.data)
             return
           }
 

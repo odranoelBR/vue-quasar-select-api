@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import Plugin from 'quasar-ui-crud/src/index.js'
+import Plugin from 'quasar-ui-select-api/src/index.js'
 
 Vue.use(Plugin)

@@ -1,5 +1,5 @@
 {
-  "name": "quasar-app-extension-crud",
+  "name": "quasar-app-extension-select-api",
   "version": "1.0.2",
   "description": "A Quasar App Extension",
   "author": "odranoelo_O@hotmail.com",
@@ -12,7 +12,7 @@
   "bugs": "",
   "homepage": "",
   "dependencies": {
-    "quasar-ui-crud": "^1.0.1"
+    "quasar-ui-select-api": "^1.0.1"
   },
   "engines": {
     "node": ">= 8.9.0",

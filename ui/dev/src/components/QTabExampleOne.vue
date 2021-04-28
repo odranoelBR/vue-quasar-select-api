@@ -60,7 +60,10 @@
       </q-tab-panel>
 
       <q-tab-panel name="script">
-        <highlightjs language="javascript" />
+        <highlightjs
+          language="javascript"
+          :code="createdString"
+        />
       </q-tab-panel>
     </q-tab-panels>
   </div>
@@ -83,16 +86,23 @@ export default {
     }
   },
   data: () => ({
+    createdString: ` created () {
+    this.axios = axios.create({ baseURL: 'https://jsonplaceholder.typicode.com/' })
+ }`,
     selectedUser: null,
     tab: 'example',
     axios: null,
-    code: `<crud
- :columns.sync="columns"
- :http="axios"
- :list-index="list => list.data"
- api="api/users"
- title="Emails"
- row-key="id"
+    code: `<select-api
+  :http="axios"
+  api="users"
+  v-model="selectedUser"
+  clearable
+  emit-value
+  map-options
+  autofocus-filter
+  option-value="id"
+  option-label="name"
+  label="Select User"
 />`
   }),
   computed: {

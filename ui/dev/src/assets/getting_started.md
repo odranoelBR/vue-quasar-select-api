@@ -1,29 +1,29 @@
 
 
-Quasar Crud
+Quasar Select Api
 =
-> Quasar Crud Component based on QTable using Axios API to fetch remote data.
+> Quasar Select Api based on QSelect using Axios API to fetch remote data and fill options.
 
 ## Install / Uninstall
 
 ### Quasar Extension
 ```js
-quasar ext add crud //install
+quasar ext add select-api //install
 
-quasar ext remove crud //uninstall
+quasar ext remove select-api //uninstall
 ```
 
 **OR**:
 Create and register a boot file:
 
 ```js
-npm i quasar-app-extension-crud 
-yarn add quasar-app-extension-crud 
+npm i quasar-app-extension-select-api 
+yarn add quasar-app-extension-select-api 
 ```
 
 ```js
 import Vue from 'vue'
-import Plugin from 'quasar-ui-crud/src/index.js'
+import Plugin from 'quasar-ui-select-api/src/index.js'
 
 Vue.use(Plugin)
 ```
