@@ -1,4 +1,4 @@
-# Quasar App Extension crud
+# Quasar App Extension Select Api
 
 > Add a short description of your App Extension. What does it do? How is it beneficial? Why would someone want to use it?
 
@@ -7,7 +7,7 @@
 
 # Install
 ```bash
-quasar ext add crud
+quasar ext add select-api
 ```
 Quasar CLI will retrieve it from NPM and install the extension.
 
@@ -17,7 +17,7 @@ Quasar CLI will retrieve it from NPM and install the extension.
 
 # Uninstall
 ```bash
-quasar ext remove crud
+quasar ext remove select-api
 ```
 
 # Info

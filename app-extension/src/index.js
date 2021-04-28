@@ -8,13 +8,13 @@
 
 function extendConf (conf) {
   // register our boot file
-  conf.boot.push('~quasar-app-extension-crud/src/boot/register.js')
+  conf.boot.push('~quasar-app-extension-select-api/src/boot/register.js')
 
   conf.framework.plugins.push('Dialog')
   conf.framework.plugins.push('Notify')
 
   // make sure app extension files & ui package gets transpiled
-  conf.build.transpileDependencies.push(/quasar-app-extension-crud[\\/]src/)
+  conf.build.transpileDependencies.push(/quasar-app-extension-select-api[\\/]src/)
 }
 
 module.exports = function (api) {
@@ -25,7 +25,7 @@ module.exports = function (api) {
   api.compatibleWith('@quasar/app', '^1.1.0 || ^2.0.0')
 
   // Uncomment the line below if you provide a JSON API for your component
-  // api.registerDescribeApi('MyComponent', '~quasar-ui-crud/src/components/MyComponent.json')
+  // api.registerDescribeApi('MyComponent', '~quasar-ui-select-api/src/components/MyComponent.json')
 
   // We extend /quasar.conf.js
   api.extendQuasarConf(extendConf)

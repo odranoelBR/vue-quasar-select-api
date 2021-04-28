@@ -11,13 +11,13 @@
         />
 
         <q-toolbar-title>
-          Quasar Crud v{{ version }}
+          Quasar Select Api v{{ version }}
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
         <a
           target="_blank"
-          href="https://github.com/odranoelBR/vue-quasar-crud"
+          href="https://github.com/odranoelBR/vue-quasar-select-api"
           class="text-white q-pa-sm"
         >
           <q-icon

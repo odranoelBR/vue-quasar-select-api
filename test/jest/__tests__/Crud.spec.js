@@ -1,6 +1,6 @@
 import { mountQuasar } from '../index'
 import axios from 'axios'
-import Crud from '@components/Crud.vue'
+import SelectApi from '@components/SelectApi.vue'
 import columns from './columns.js'
 import response from './response.json'
 
