@@ -1,20 +1,20 @@
 import { version } from '../package.json'
 
-import Crud from './components/Crud.vue'
+import SelectApi from './components/SelectApi.vue'
 
 
 export {
   version,
-  Crud
+  SelectApi
 
 }
 
 export default {
   version,
-  Crud,
+  SelectApi,
 
   install (Vue) {
-    Vue.component(Crud.name, Crud)
+    Vue.component(SelectApi.name, SelectApi)
 
   }
 }

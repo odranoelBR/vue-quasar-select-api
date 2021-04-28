@@ -11,7 +11,7 @@
         />
 
         <q-toolbar-title>
-          Quasar Crud v{{ version }}
+          Quasar Select Api v{{ version }}
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>

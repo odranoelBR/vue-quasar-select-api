@@ -1,8 +1,8 @@
 {
-  "name": "quasar-ui-crud",
+  "name": "quasar-select-api",
   "version": "1.0.1",
   "author": "odranoelo_O@hotmail.com",
-  "description": "Crud quasar on rest apis",
+  "description": "QSelect with rest apis",
   "license": "MIT",
   "module": "dist/index.esm.js",
   "main": "dist/index.common.js",
