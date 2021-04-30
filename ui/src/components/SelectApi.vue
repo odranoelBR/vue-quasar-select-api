@@ -6,34 +6,24 @@ export default {
   name: 'SelectApi',
   extends: QSelect,
   props: {
-    api: {
-      type: String,
-      required: true
-    },
-    http: {
-      type: Function,
-      required: true
-    },
-    hideSelected: {
-      type: Boolean,
-      default: false
-    },
-    params: {
-      type: String,
-      default: ''
-    },
-    fetchOnParamChange: {
-      type: Boolean,
-      default: false
-    },
-    useInput: {
-      type: Boolean,
-      default: true
-    },
-    optionFormater: {
-      type: Function,
-      default: null
-    }
+    /** The rest API endpoint */
+    api: { type: String, required: true },
+    /** The Axios instance
+    *  @example axios.create({ baseURL: 'https://reqres.in/' })
+    */
+    http: { type: Function, required: true },
+    /** Query params of the url
+   * @link https://en.wikipedia.org/wiki/Query_string
+   */
+    params: { type: String, default: '' },
+    /** The component will fetch remote data on mounted hook */
+    getOnStart: { type: Boolean, default: true },
+    /** The component will fetch remote data on params props change */
+    getOnParamChange: { type: Boolean, default: false },
+    /** The function to format the API response
+     * @example formter (data) { return data.map(row => row.nestedObject) }
+    */
+    optionFormater: { type: Function, default: null }
   },
   beforeCreate () {
     //this.qListeners.filter = true
@@ -55,7 +45,9 @@ export default {
     clearOptions: []
   }),
   mounted () {
-    this.getData()
+    if (this.getOnStart) {
+      this.get()
+    }
   },
   computed: {
     url () {
@@ -64,17 +56,20 @@ export default {
   },
   watch: {
     params () {
-      if (this.fetchOnParamChange) {
-        this.getData()
+      if (this.getOnParamChange) {
+        this.get()
       }
     }
   },
   methods: {
-    getData () {
+    get () {
       this.loading = true
       this.http.get(this.url)
         .then(response => {
-          this.$emit('fetched')
+          /**
+          *  $emit('successOnGet', response) on sucefull get request.
+          */
+          this.$emit('successOnGet', response)
 
           if (this.optionFormater) {
             this.clearOptions = this.optionFormater(response.data)
@@ -86,7 +81,10 @@ export default {
           this.options = response.data
         })
         .catch(error => {
-          this.$emit('error', error)
+          /**
+           *  Emit the ERROR Object of axios catch.
+           */
+          this.$emit('errorOnGet', error)
         })
         .finally(() => this.loading = false)
     }

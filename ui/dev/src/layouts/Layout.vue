@@ -41,7 +41,6 @@
       >
         <router-view class="q-ma-md" />
       </transition>
-      </q-page>
     </q-page-container>
   </q-layout>
 </template>
