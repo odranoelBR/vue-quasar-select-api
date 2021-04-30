@@ -3,11 +3,11 @@
     padding
     class="row justify-center"
   >
-    <div class="col-8">
+    <div class="col-10">
       <q-card class="q-mb-lg">
         <q-card-section class="bg-grey-9 text-white">
-          <div class="text-h6">Can only delete. </div>
-          <div class="text-subtitle2">Ex: The resource has soft delete</div>
+          <div class="text-h6">Don't fetch on start. </div>
+          <div class="text-subtitle2">Fetch on param change!</div>
         </q-card-section>
         <q-separator
           dark
@@ -20,9 +20,8 @@
 
       <q-card class="q-mb-lg">
         <q-card-section class="bg-grey-9 text-white">
-          <div class="text-h6">Only fetch after user select. </div>
-          <div class="text-subtitle2">Using form outside of table to filter requests</div>
-          <div class="text-subtitle2">Fetch when param changes</div>
+          <div class="text-h6">API response must be formated. </div>
+          <div class="text-subtitle2">We can format the response!</div>
         </q-card-section>
         <q-separator
           dark
@@ -33,7 +32,7 @@
         </q-card-section>
       </q-card>
 
-      <q-card class="q-mb-lg">
+      <!-- <q-card class="q-mb-lg">
         <q-card-section class="bg-grey-9 text-white">
           <div class="text-h6">Rule to edit only the completed tasks. </div>
           <div class="text-subtitle2"></div>
@@ -74,21 +73,22 @@
         <q-card-section class="no-padding">
           <q-tab-example-six />
         </q-card-section>
-      </q-card>
+      </q-card> -->
     </div>
   </q-page>
 </template>
 
 <script>
-// import QTabExampleTwo from '@components/QTabExampleTwo'
-// import QTabExampleThree from '@components/QTabExampleThree'
+import QTabExampleTwo from '@components/QTabExampleTwo'
+import QTabExampleThree from '@components/QTabExampleThree'
 // import QTabExampleFour from '@components/QTabExampleFour'
 // import QTabExampleFive from '@components/QTabExampleFive'
 // import QTabExampleSix from '@components/QTabExampleSix'
 
 export default {
   components: {
-    // QTabExampleTwo, QTabExampleThree, QTabExampleFour, QTabExampleFive, QTabExampleSix
+    QTabExampleTwo, QTabExampleThree
+    //  QTabExampleFour, QTabExampleFive, QTabExampleSix
   }
 }
 </script>

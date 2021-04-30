@@ -34,8 +34,8 @@
         name="example"
         ref="panel"
       >
-        <div class="row q-pa-md">
-          <div class="col-6">
+        <div class="row q-pa-md q-col-gutter-sm">
+          <div class="col-4">
             <select-api
               :http="axios"
               api="users"
@@ -47,6 +47,22 @@
               option-value="id"
               option-label="name"
               label="Select User"
+            />
+          </div>
+          <div class="col-8">
+            <select-api
+              :http="axios"
+              :get-on-start="false"
+              :get-on-param-change="true"
+              :params="`userId=${selectedUser}`"
+              api="posts"
+              v-model="selectedPost"
+              clearable
+              emit-value
+              map-options
+              option-value="id"
+              option-label="title"
+              label="Select posts from the user"
             />
           </div>
 
@@ -81,31 +97,38 @@ export default {
   created () {
     this.axios = axios.create({ baseURL: 'https://jsonplaceholder.typicode.com/' })
   },
+
   data: () => ({
     createdString: ` created () {
     this.axios = axios.create({ baseURL: 'https://jsonplaceholder.typicode.com/' })
  },
  data: () => ({
-   selectedUser: null
- }),`,
+   selectedUser: null,
+   selectedPost: null,
+ })`,
     selectedUser: null,
+    selectedPost: null,
     tab: 'example',
     axios: null,
-    code: `<select-api
+    code: ` <select-api
   :http="axios"
-  api="users"
-  v-model="selectedUser"
+  :get-on-start="false"
+  :get-on-param-change="true"
+  :params="\`userId=\${selectedUser}\`"
+  api="posts"
+  v-model="selectedPost"
   clearable
   emit-value
   map-options
-  autofocus-filter
   option-value="id"
-  option-label="name"
-  label="Select User"
-/>`
+  option-label="title"
+  label="Select posts from the user"
+ />`
   }),
-  computed: {
-
+  watch: {
+    selectedUser () {
+      this.selectedPost = null
+    }
   }
 }
 </script >

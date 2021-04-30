@@ -34,20 +34,23 @@
         name="example"
         ref="panel"
       >
-        <div class="row q-pa-md">
-          <div class="col-6">
+        <div class="row q-pa-md q-col-gutter-sm">
+          <div class="col-10">
             <select-api
               :http="axios"
+              :optionFormater="optionFormater"
               api="users"
-              v-model="selectedUser"
+              v-model="selectedAdress"
               clearable
               emit-value
               map-options
-              autofocus-filter
               option-value="id"
-              option-label="name"
-              label="Select User"
-            />
+              option-label="street"
+            >
+              <template v-slot:prepend>
+                Street from the user:
+              </template>
+            </select-api>
           </div>
 
         </div>
@@ -81,31 +84,42 @@ export default {
   created () {
     this.axios = axios.create({ baseURL: 'https://jsonplaceholder.typicode.com/' })
   },
+
   data: () => ({
     createdString: ` created () {
     this.axios = axios.create({ baseURL: 'https://jsonplaceholder.typicode.com/' })
  },
  data: () => ({
-   selectedUser: null
- }),`,
-    selectedUser: null,
+   selectedAdress: null
+ }),
+ methods: {
+   optionFormater (responseData) {
+     return responseData.map(response => response.address)
+   }
+ }`,
+    selectedAdress: null,
     tab: 'example',
     axios: null,
-    code: `<select-api
-  :http="axios"
-  api="users"
-  v-model="selectedUser"
-  clearable
-  emit-value
-  map-options
-  autofocus-filter
-  option-value="id"
-  option-label="name"
-  label="Select User"
-/>`
+    code: ` <select-api
+    :http="axios"
+    :optionFormater="optionFormater"
+    api="users"
+    v-model="selectedAdress"
+    clearable
+    emit-value
+    map-options
+    option-value="id"
+    option-label="street"
+  >
+    <template v-slot:prepend>
+      Street from the user:
+    </template>
+  </select-api>`
   }),
-  computed: {
-
+  methods: {
+    optionFormater (responseData) {
+      return responseData.map(response => response.address)
+    }
   }
 }
 </script >
