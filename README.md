@@ -1,5 +1,5 @@
    
-![Quasar Select API](https://github.com/odranoelBR/vue-quasar-select-api/blob/main/docs/logo.PNG)
+![Quasar Select API](https://github.com/odranoelBR/vue-quasar-select-api/blob/main/docs/logo.png)
 > Quasar QSelect component with automatic api fetch and render using Axios.js.
 
 <hr />
