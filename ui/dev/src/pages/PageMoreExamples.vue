@@ -32,10 +32,10 @@
         </q-card-section>
       </q-card>
 
-      <!-- <q-card class="q-mb-lg">
+      <q-card class="q-mb-lg">
         <q-card-section class="bg-grey-9 text-white">
-          <div class="text-h6">Rule to edit only the completed tasks. </div>
-          <div class="text-subtitle2"></div>
+          <div class="text-h6">Embeeded filter with two props set true. </div>
+          <div class="text-subtitle2">Clean code!</div>
         </q-card-section>
         <q-separator
           dark
@@ -46,7 +46,7 @@
         </q-card-section>
       </q-card>
 
-      <q-card class="q-mb-lg">
+      <!--<q-card class="q-mb-lg">
         <q-card-section class="bg-grey-9 text-white">
           <div class="text-h6">Changing types of form for edit / create </div>
           <div class="text-subtitle2">Notify on update</div>
@@ -81,14 +81,14 @@
 <script>
 import QTabExampleTwo from '@components/QTabExampleTwo'
 import QTabExampleThree from '@components/QTabExampleThree'
-// import QTabExampleFour from '@components/QTabExampleFour'
+import QTabExampleFour from '@components/QTabExampleFour'
 // import QTabExampleFive from '@components/QTabExampleFive'
 // import QTabExampleSix from '@components/QTabExampleSix'
 
 export default {
   components: {
-    QTabExampleTwo, QTabExampleThree
-    //  QTabExampleFour, QTabExampleFive, QTabExampleSix
+    QTabExampleTwo, QTabExampleThree, QTabExampleFour
+    //  , QTabExampleFive, QTabExampleSix
   }
 }
 </script>

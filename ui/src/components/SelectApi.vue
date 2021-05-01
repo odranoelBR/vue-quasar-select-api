@@ -23,20 +23,13 @@ export default {
     /** The function to format the API response
      * @example formter (data) { return data.map(row => row.nestedObject) }
     */
-    optionFormater: { type: Function, default: null }
+    optionFormater: { type: Function, default: null },
+    /** Set filter using input (you must set useInput props to true, like QSelect docs) */
+    inputFilter: { type: Boolean, default: false },
   },
   beforeCreate () {
-    //this.qListeners.filter = true
-
     Vue.delete(this.$options.props, 'loading');
     Vue.delete(this.$options.props, 'options');
-
-    // this.$on('filter', (val, update, abort) => {
-    //   update(() => {
-    //     const needle = val.toLowerCase()
-    //     this.options = this.clearOptions.filter(v => v[this.optionLabel].toLowerCase().indexOf(needle) > -1)
-    //   })
-    // })
   },
   data: () => ({
     loading: false,
@@ -48,6 +41,8 @@ export default {
     if (this.getOnStart) {
       this.get()
     }
+
+    this.addFilter()
   },
   computed: {
     url () {
@@ -87,6 +82,17 @@ export default {
           this.$emit('errorOnGet', error)
         })
         .finally(() => this.loading = false)
+    },
+    addFilter () {
+      if (this.filter) {
+        this.qListeners.filter = true
+        this.$on('filter', (val, update, abort) => {
+          update(() => {
+            const needle = val.toLowerCase()
+            this.options = this.clearOptions.filter(v => v[this.optionLabel].toLowerCase().indexOf(needle) > -1)
+          })
+        })
+      }
     }
   }
 }
