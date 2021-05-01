@@ -5,10 +5,6 @@
   >
     <div class="col-8 ">
       <q-markdown
-        :src="columns"
-        toc
-      />
-      <q-markdown
         :src="doc"
         toc
       />
@@ -18,12 +14,10 @@
 </template>
 
 <script>
-//import columns from 'assets/columns.md'
-//import doc from '../../../src/components/Crud.md'
+import doc from '../../../src/components/SelectApi.md'
 export default {
   data: () => ({
-    //doc,
-    //columns
+    doc
   })
 
 }
