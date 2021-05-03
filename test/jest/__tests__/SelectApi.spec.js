@@ -1,7 +1,6 @@
 import { mountQuasar } from '../index'
 import axios from 'axios'
 import SelectApi from '@components/SelectApi.vue'
-import columns from './columns.js'
 import response from './response.json'
 
 jest.mock('axios');
@@ -14,7 +13,6 @@ beforeAll(() => {
 const defaultPropsData = () => ({
   http: axios,
   api: '',
-  columns: JSON.parse(JSON.stringify(columns)),
   listIndex: value => value,
   rowKey: ''
 })
@@ -27,7 +25,7 @@ let returnData = [
 test('all columns enabled to create', () => {
   axios.get.mockResolvedValueOnce([]);
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: defaultPropsData()
   })
 
@@ -37,7 +35,7 @@ test('all columns enabled to create', () => {
 test('at least one row was selected', () => {
   axios.get.mockResolvedValueOnce(returnData);
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: defaultPropsData()
   })
   wrapper.setData({ selected: [returnData[0]] })
@@ -48,7 +46,7 @@ test('at least one row was selected', () => {
 test('using customSelected slot', () => {
   axios.get.mockResolvedValueOnce([]);
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: defaultPropsData(),
     slots: {
       customSelected: '<div />'
@@ -63,7 +61,7 @@ test('get fields with validation', () => {
 
   const props = defaultPropsData()
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -77,7 +75,7 @@ test('custom message delete with function after user select', () => {
   const props = defaultPropsData()
   props.msgDelete = row => `Deleted ${row.first_name} ?`
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -93,7 +91,7 @@ test('custom title delete with function after user select', () => {
   const props = defaultPropsData()
   props.titleDelete = row => `Do you want delete ${row.first_name} ?`
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -109,7 +107,7 @@ test('get fields with validation', () => {
 
   const props = defaultPropsData()
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -123,7 +121,7 @@ test('mount component without make requests', () => {
   const props = defaultPropsData()
   props.getOnStart = false
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -139,7 +137,7 @@ test('make a get request ONLY when param change', async () => {
   props.getOnStart = false
   props.getOnParamChange = true
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -158,7 +156,7 @@ test('only email column are visible to create', () => {
   props.columns[0].showCreate = false
   axios.get.mockResolvedValue([]);
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -171,7 +169,7 @@ test('api url mounting default mouting', () => {
 
   props.api = 'people'
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -185,7 +183,7 @@ test('api url mounting no server side pagination', () => {
   props.api = 'people'
   props.paginationServerSide = false
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -201,7 +199,7 @@ test('object to save mounting empty', () => {
   props.columns[0].value = ''
   props.columns[1].value = ''
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -215,7 +213,7 @@ test('object to save mounting simple values', () => {
   props.columns[0].value = 'Brother Lee'
   props.columns[1].value = 'brother@mail.com'
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -230,7 +228,7 @@ test('object to save mounting complex values', () => {
   props.columns[0].value = {}
   props.columns[1].value = []
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -247,7 +245,7 @@ test('object to save mounting with formating values', () => {
   props.columns[1].value = 'brother'
   props.columns[1].formatForPost = (value) => `${value}@mail.com`
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -264,7 +262,7 @@ test('column prop valitador with string value on format', () => {
   props.columns[1].value = 'brother'
   props.columns[1].formatForPost = {}
 
-  const validator = Crud.props.columns.validator
+  const validator = SelectApi.props.columns.validator
 
   expect(validator(props.columns)).toBeFalsy()
   expect(console.warn).toHaveBeenCalled();
@@ -275,7 +273,7 @@ test('open modal without data', () => {
   axios.get.mockResolvedValue([]);
 
   const props = defaultPropsData()
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
   const spyOnResetColumnValuesMethod = jest.spyOn(wrapper.vm, 'resetColumnValues')
@@ -291,7 +289,7 @@ test('open modal with data after select a row ', () => {
   axios.get.mockResolvedValue(returnData);
 
   const props = defaultPropsData()
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -309,7 +307,7 @@ test('open modal with data after select a row ', () => {
 test('get $emit successOnGet event', async () => {
 
   const props = defaultPropsData()
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -327,7 +325,7 @@ test('o succefull get set the total size from api', async () => {
 
   props.paginationTotalIndex = 'total'
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -345,7 +343,7 @@ test('get $emit errorOnGet event', async () => {
 
   const props = defaultPropsData()
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -360,7 +358,7 @@ test('delete $emit successOnDelete event', async () => {
   axios.delete.mockResolvedValue();
 
   const props = defaultPropsData()
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -379,7 +377,7 @@ test('delete $emit errorOnDelete event', async () => {
 
   const props = defaultPropsData()
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -398,7 +396,7 @@ test('put $emit successOnPut event', async () => {
 
   const props = defaultPropsData()
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
   wrapper.setData({ selected: [returnData[0]] })
@@ -416,7 +414,7 @@ test('put $emit errorOnPut event', async () => {
 
   const props = defaultPropsData()
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -435,7 +433,7 @@ test('post $emit successOnPost event', async () => {
 
   const props = defaultPropsData()
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -452,7 +450,7 @@ test('post $emit errorOnPost event', async () => {
 
   const props = defaultPropsData()
 
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -471,7 +469,7 @@ test('reset validation when saving with validation errors, dont make requests', 
   axios.put.mockResolvedValue([]);
 
   const props = defaultPropsData()
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -499,7 +497,7 @@ test('saving start loading', () => {
   axios.put.mockResolvedValue([]);
 
   const props = defaultPropsData()
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -514,7 +512,7 @@ test('save start put request because at least one row are selected', () => {
   axios.get.mockResolvedValue(returnData);
 
   const props = defaultPropsData()
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -532,7 +530,7 @@ test('save start put request because at least one row are selected', () => {
 test('request update pagination', () => {
 
   const props = defaultPropsData()
-  const wrapper = mountQuasar(Crud, {
+  const wrapper = mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -544,7 +542,7 @@ test('request update pagination', () => {
 // test('request fetch remote data', async () => {
 
 //   const props = defaultPropsData()
-//   const wrapper = await mountQuasar(Crud, {
+//   const wrapper = await mountQuasar(SelectApi, {
 //     propsData: props
 //   })
 
@@ -565,7 +563,7 @@ test('reset column values with proper types (string and array)', async () => {
 
   const props = defaultPropsData()
 
-  const wrapper = await mountQuasar(Crud, {
+  const wrapper = await mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -584,7 +582,7 @@ test('reset column values with proper types ( Boolean and Number)', async () => 
 
   const props = defaultPropsData()
 
-  const wrapper = await mountQuasar(Crud, {
+  const wrapper = await mountQuasar(SelectApi, {
     propsData: props
   })
 
@@ -604,7 +602,7 @@ test('reset column values static config', async () => {
   const props = defaultPropsData()
   props.columns[0].static = true
 
-  const wrapper = await mountQuasar(Crud, {
+  const wrapper = await mountQuasar(SelectApi, {
     propsData: props
   })
 
