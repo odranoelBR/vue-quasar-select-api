@@ -1,6 +1,5 @@
 <script>
-import QSelect from 'quasar/src/components/select/QSelect'
-import Vue from 'vue'
+import { QSelect } from 'quasar'
 
 export default {
   name: 'SelectApi',
@@ -28,8 +27,8 @@ export default {
     inputFilter: { type: Boolean, default: false },
   },
   beforeCreate () {
-    Vue.delete(this.$options.props, 'loading');
-    Vue.delete(this.$options.props, 'options');
+    this.$delete(this.$options.props, 'loading')
+    this.$delete(this.$options.props, 'options')
   },
   data: () => ({
     loading: false,
