@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+import { createLocalVue, shallowMount, mount } from '@vue/test-utils'
 import * as All from 'quasar'
 import Vue from 'vue'
 const { Cookies, Quasar } = All
