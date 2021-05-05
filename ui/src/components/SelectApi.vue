@@ -32,11 +32,10 @@ export default {
   },
   data: () => ({
     loading: false,
-    model: '',
     options: [],
     clearOptions: []
   }),
-  mounted () {
+  created () {
     if (this.getOnStart) {
       this.get()
     }
@@ -65,6 +64,7 @@ export default {
           */
           this.$emit('successOnGet', response)
 
+
           if (this.optionFormater) {
             this.clearOptions = this.optionFormater(response.data)
             this.options = this.optionFormater(response.data)
@@ -85,13 +85,14 @@ export default {
     addFilter () {
       if (this.filter) {
         this.qListeners.filter = true
-        this.$on('filter', (val, update, abort) => {
-          update(() => {
-            const needle = val.toLowerCase()
-            this.options = this.clearOptions.filter(v => v[this.optionLabel].toLowerCase().indexOf(needle) > -1)
-          })
-        })
+        this.$on('filter', this.filterHandler)
       }
+    },
+    filterHandler (val, update) {
+      update(() => {
+        const needle = val.toLowerCase()
+        this.options = this.clearOptions.filter(v => v[this.optionLabel].toLowerCase().indexOf(needle) > -1)
+      })
     }
   }
 }
