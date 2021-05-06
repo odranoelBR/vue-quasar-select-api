@@ -23,7 +23,7 @@ quasar ext remove select-api
 ```
 
 ## Demo 
-...
+https://vue-quasar-select-api.netlify.app/
 
 ## Infos
 * Using Quasar default quasar extesion template
