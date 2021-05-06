@@ -1,6 +1,6 @@
 {
-  "name": "quasar-select-api",
-  "version": "1.0.1",
+  "name": "quasar-ui-select-api",
+  "version": "1.0.0",
   "author": "odranoelo_O@hotmail.com",
   "description": "QSelect with rest apis",
   "license": "MIT",
