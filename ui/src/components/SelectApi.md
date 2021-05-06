@@ -10,6 +10,7 @@
 | getOnStart       | The component will fetch remote data on mounted hook                                                               | boolean | -      | true    |
 | getOnParamChange | The component will fetch remote data on params props change                                                        | boolean | -      | false   |
 | optionFormater   | The function to format the API response<br/>`@example` formter (data) { return data.map(row => row.nestedObject) } | func    | -      | null    |
+| inputFilter      | Set filter using input (you must set useInput props to true, like QSelect docs)                                    | boolean | -      | false   |
 
 ## Events
 
