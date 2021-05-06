@@ -1,7 +1,6 @@
 import { mountQuasar } from '../index'
 import axios from 'axios'
 import SelectApi from '@components/SelectApi.vue'
-import response from './response.json'
 
 jest.mock('axios');
 
@@ -19,8 +18,8 @@ beforeEach(() => {
 const defaultPropsData = () => ({ http: axios, api: '' })
 
 let returnData = [
-  { id: 1, first_name: 'Brominator', email: 'bro@gmail.com' },
-  { id: 2, first_name: 'Foo f', email: 'foo@gmail.com' }
+  { id: 1, first_name: 'Brominator' },
+  { id: 2, first_name: 'Foo f' }
 ]
 
 test('mount component with request', async () => {
@@ -117,4 +116,55 @@ test('get $emit errorOnGet event', async () => {
   await wrapper.vm.$nextTick()
 
   expect(wrapper.emitted().errorOnGet).toBeTruthy()
+})
+
+test('nested api response', async () => {
+
+  axios.get.mockResolvedValueOnce({
+    data: {
+      people: [],
+      cars: {
+        data: returnData
+      }
+    }
+  });
+
+  const props = defaultPropsData()
+  props.optionFormater = (list) => {
+    return list.cars.data
+  }
+
+  const wrapper = await mountQuasar(SelectApi, {
+    propsData: props
+  })
+
+  expect(wrapper.vm.clearOptions).toHaveLength(2)
+  expect(wrapper.vm.options).toHaveLength(2)
+  expect(wrapper.vm.clearOptions[0]['first_name']).toBe('Brominator')
+})
+
+test('filtering the list', async () => {
+
+  axios.get.mockResolvedValueOnce({ data: returnData })
+
+  const props = defaultPropsData()
+  props.filter = true
+  props.useInput = true
+  props.optionValue = 'id'
+  props.optionLabel = 'first_name'
+
+  const wrapper = await mountQuasar(SelectApi, {
+    propsData: props
+  })
+
+  expect(wrapper.vm.clearOptions).toHaveLength(2)
+  expect(wrapper.vm.options).toHaveLength(2)
+  expect(wrapper.vm.qListeners.filter).toBeTruthy()
+  expect(wrapper.emitted().filter).toBeFalsy()
+
+  wrapper.vm.filterHandler('Bro', (fn) => fn())
+
+
+  expect(wrapper.vm.clearOptions).toHaveLength(2)
+  expect(wrapper.vm.options).toHaveLength(1)
 })
